@@ -66,7 +66,7 @@ export default function Footer() {
                   </>
                 ) : (
                   <>
-                    <span>Subscribe</span>
+                    <span>Go</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </>
                 )}
@@ -123,7 +123,7 @@ export default function Footer() {
             High-Risk Investment & Financial Education Disclaimer
           </p>
           <p>
-            Trading foreign exchange, equities, futures, commodities, and digital assets involves significant financial risk and may not be suitable for all investors. There is a substantial risk of loss, and you may lose some or all of your invested capital. All content, masterclasses, research reports, and analytical tools provided by Lari Traders are strictly for educational and informational purposes only and do not constitute financial, investment, legal, or tax advice. No representation is made that any individual or account will or is likely to achieve profits or losses similar to those discussed. Past performance and simulated backtest results are not indicative of future outcomes. Please consult with an independent, licensed financial advisor before making any financial or trading decisions.
+            Trading involves significant risk of loss. Lari Traders’ content is for educational purposes only and is not financial advice. Past performance does not guarantee future results. Consult a licensed financial advisor before investing.
           </p>
         </div>
 

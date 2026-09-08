@@ -47,8 +47,8 @@ const PLANS: PricingPlan[] = [
   {
     id: 'pro',
     name: 'Professional Trader',
-    priceMonthly: '$149/m',
-    priceYearly: '$119/m',
+    priceMonthly: '₹2499/m',
+    priceYearly: '₹4000/m',
     period: '/m',
     description: 'Comprehensive curriculum for serious traders seeking structured mentorship, daily analysis, and risk models.',
     features: [
@@ -63,8 +63,8 @@ const PLANS: PricingPlan[] = [
   {
     id: 'institutional',
     name: 'Institutional Desk',
-    priceMonthly: '$499/m',
-    priceYearly: '$399/m',
+    priceMonthly: '₹9999/m',
+    priceYearly: '₹10K/m',
     period: '/m',
     description: 'Advanced quantitative strategies, custom risk frameworks, and direct advisory for funds and prop traders.',
     features: [
@@ -199,21 +199,19 @@ export default function PricingSection() {
           <div className="inline-flex items-center p-1 rounded-full bg-[rgba(10,7,7,0.55)] backdrop-blur-xl border border-white/10 shadow-lg">
             <button
               onClick={() => setIsYearly(false)}
-              className={`px-5 py-1.5 rounded-full text-xs sm:text-sm font-[450] transition-all ${
-                !isYearly
+              className={`px-5 py-1.5 rounded-full text-xs sm:text-sm font-[450] transition-all ${!isYearly
                   ? 'bg-white text-black shadow-md font-medium'
                   : 'text-white/70 hover:text-white'
-              }`}
+                }`}
             >
               Monthly
             </button>
             <button
               onClick={() => setIsYearly(true)}
-              className={`px-5 py-1.5 rounded-full text-xs sm:text-sm font-[450] transition-all flex items-center gap-1.5 ${
-                isYearly
+              className={`px-5 py-1.5 rounded-full text-xs sm:text-sm font-[450] transition-all flex items-center gap-1.5 ${isYearly
                   ? 'bg-white text-black shadow-md font-medium'
                   : 'text-white/70 hover:text-white'
-              }`}
+                }`}
             >
               <span>Yearly</span>
               <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-cyan-400/20 text-cyan-300 font-semibold">
@@ -257,11 +255,10 @@ export default function PricingSection() {
             return (
               <div
                 key={plan.id}
-                className={`group relative rounded-[24px] sm:rounded-[33px] p-7 sm:p-9 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2.5 ${
-                  plan.popular
+                className={`group relative rounded-[24px] sm:rounded-[33px] p-7 sm:p-9 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2.5 ${plan.popular
                     ? 'bg-[rgba(16,25,48,0.65)] backdrop-blur-[30px] border border-cyan-400/45 shadow-[0_20px_55px_rgba(6,182,212,0.18)] hover:border-cyan-400/70'
                     : 'bg-[rgba(17,16,15,0.5)] backdrop-blur-[24px] border border-white/10 shadow-2xl hover:border-white/30'
-                }`}
+                  }`}
                 style={{
                   boxShadow: plan.popular
                     ? '0 0 40px rgba(56, 189, 248, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2)'
@@ -420,11 +417,10 @@ export default function PricingSection() {
                   {/* Copy Button */}
                   <button
                     onClick={() => copyToClipboard(PAYMENT_NUMBER, 'payment')}
-                    className={`w-full sm:w-auto h-10 sm:h-9 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 shrink-0 cursor-pointer ${
-                      copiedPayment
+                    className={`w-full sm:w-auto h-10 sm:h-9 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 shrink-0 cursor-pointer ${copiedPayment
                         ? 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.5)]'
                         : 'bg-white/10 hover:bg-white/20 text-white border border-white/15'
-                    }`}
+                      }`}
                   >
                     {copiedPayment ? (
                       <>
@@ -469,11 +465,10 @@ export default function PricingSection() {
                     {/* Copy Button */}
                     <button
                       onClick={() => copyToClipboard(SCREENSHOT_NUMBER, 'screenshot')}
-                      className={`flex-1 sm:flex-initial h-10 sm:h-9 px-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer ${
-                        copiedScreenshot
+                      className={`flex-1 sm:flex-initial h-10 sm:h-9 px-3.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer ${copiedScreenshot
                           ? 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.5)]'
                           : 'bg-white/10 hover:bg-white/20 text-white border border-white/15'
-                      }`}
+                        }`}
                     >
                       {copiedScreenshot ? (
                         <>

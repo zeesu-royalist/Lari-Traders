@@ -141,14 +141,48 @@ interface Ticker {
   isUp: boolean;
 }
 
-const LIVE_TICKERS: Ticker[] = [
-  { id: 'BTC', pair: 'BTC / USD', price: '$89,420', cents: '.00', change: '+32.4%', isUp: true },
-  { id: 'ETH', pair: 'ETH / USD', price: '$3,840', cents: '.00', change: '+24.8%', isUp: true },
-  { id: 'SOL', pair: 'SOL / USD', price: '$198', cents: '.50', change: '+41.2%', isUp: true },
-  { id: 'NVDA', pair: 'NVDA / USD', price: '$134', cents: '.80', change: '+18.5%', isUp: true },
-  { id: 'EUR', pair: 'EUR / USD', price: '1.08', cents: '42', change: '+2.1%', isUp: true },
-  { id: 'GOLD', pair: 'GOLD (XAU)', price: '$2,682', cents: '.00', change: '+14.7%', isUp: true },
-];
+const TICKER_BY_TIMEFRAME: Record<TimeframeKey, Ticker[]> = {
+  '1D': [
+    { id: 'BTC',  pair: 'BTC / USD',  price: '$89,420', cents: '.00', change: '+32.4%', isUp: true },
+    { id: 'ETH',  pair: 'ETH / USD',  price: '$3,840',  cents: '.00', change: '+24.8%', isUp: true },
+    { id: 'SOL',  pair: 'SOL / USD',  price: '$198',    cents: '.50', change: '+41.2%', isUp: true },
+    { id: 'NVDA', pair: 'NVDA / USD', price: '$134',    cents: '.80', change: '+18.5%', isUp: true },
+    { id: 'EUR',  pair: 'EUR / USD',  price: '1.08',    cents: '42',  change: '+2.1%',  isUp: true },
+    { id: 'GOLD', pair: 'GOLD (XAU)', price: '$2,682',  cents: '.00', change: '+14.7%', isUp: true },
+  ],
+  '1W': [
+    { id: 'BTC',  pair: 'BTC / USD',  price: '$91,250', cents: '.00', change: '+18.7%', isUp: true },
+    { id: 'ETH',  pair: 'ETH / USD',  price: '$3,960',  cents: '.00', change: '+14.2%', isUp: true },
+    { id: 'SOL',  pair: 'SOL / USD',  price: '$204',    cents: '.30', change: '+22.5%', isUp: true },
+    { id: 'NVDA', pair: 'NVDA / USD', price: '$138',    cents: '.40', change: '+9.8%',  isUp: true },
+    { id: 'EUR',  pair: 'EUR / USD',  price: '1.09',    cents: '15',  change: '+1.4%',  isUp: true },
+    { id: 'GOLD', pair: 'GOLD (XAU)', price: '$2,695',  cents: '.00', change: '+7.3%',  isUp: true },
+  ],
+  '1M': [
+    { id: 'BTC',  pair: 'BTC / USD',  price: '$94,800', cents: '.00', change: '+44.2%', isUp: true },
+    { id: 'ETH',  pair: 'ETH / USD',  price: '$4,120',  cents: '.00', change: '+31.6%', isUp: true },
+    { id: 'SOL',  pair: 'SOL / USD',  price: '$215',    cents: '.80', change: '+53.8%', isUp: true },
+    { id: 'NVDA', pair: 'NVDA / USD', price: '$142',    cents: '.60', change: '+24.1%', isUp: true },
+    { id: 'EUR',  pair: 'EUR / USD',  price: '1.09',    cents: '80',  change: '+3.6%',  isUp: true },
+    { id: 'GOLD', pair: 'GOLD (XAU)', price: '$2,740',  cents: '.00', change: '+19.2%', isUp: true },
+  ],
+  '1Y': [
+    { id: 'BTC',  pair: 'BTC / USD',  price: '$108,500', cents: '.00', change: '+128.5%', isUp: true },
+    { id: 'ETH',  pair: 'ETH / USD',  price: '$5,280',   cents: '.00', change: '+87.4%',  isUp: true },
+    { id: 'SOL',  pair: 'SOL / USD',  price: '$298',     cents: '.00', change: '+142.6%', isUp: true },
+    { id: 'NVDA', pair: 'NVDA / USD', price: '$168',     cents: '.20', change: '+64.3%',  isUp: true },
+    { id: 'EUR',  pair: 'EUR / USD',  price: '1.11',     cents: '40',  change: '+8.2%',   isUp: true },
+    { id: 'GOLD', pair: 'GOLD (XAU)', price: '$3,040',   cents: '.00', change: '+43.8%',  isUp: true },
+  ],
+  'ALL': [
+    { id: 'BTC',  pair: 'BTC / USD',  price: '$108,500', cents: '.00', change: '+384.2%', isUp: true },
+    { id: 'ETH',  pair: 'ETH / USD',  price: '$5,280',   cents: '.00', change: '+218.6%', isUp: true },
+    { id: 'SOL',  pair: 'SOL / USD',  price: '$298',     cents: '.00', change: '+512.4%', isUp: true },
+    { id: 'NVDA', pair: 'NVDA / USD', price: '$168',     cents: '.20', change: '+196.8%', isUp: true },
+    { id: 'EUR',  pair: 'EUR / USD',  price: '1.11',     cents: '40',  change: '+14.5%',  isUp: true },
+    { id: 'GOLD', pair: 'GOLD (XAU)', price: '$3,040',   cents: '.00', change: '+124.3%', isUp: true },
+  ],
+};
 
 interface OrderItem {
   id: string;
@@ -181,6 +215,7 @@ export default function TradingDashboard() {
   const [rebalanceMessage, setRebalanceMessage] = useState<string | null>(null);
 
   const currentData = TIMEFRAME_CONFIG[selectedTimeframe];
+  const currentTickers = TICKER_BY_TIMEFRAME[selectedTimeframe];
   const maxBarHeight = Math.max(...currentData.bars);
 
   // Trigger simulated live ticker pulses periodically
@@ -268,7 +303,7 @@ export default function TradingDashboard() {
 
         {/* Live Ticker Cards (Interactive Asset Selector) */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10">
-          {LIVE_TICKERS.map((t) => {
+          {currentTickers.map((t) => {
             const isSelected = selectedTicker === t.id;
             return (
               <div
