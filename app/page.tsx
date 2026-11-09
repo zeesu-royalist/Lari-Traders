@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#080A19] text-white selection:bg-white selection:text-black">
+    <man className="relative min-h-screen bg-[#080A19] text-white selection:bg-white selection:text-black">
       {/* 
         STICKY HERO:
         Stays fixed in place at the top of the viewport (z-0, 100vh) while scrolling.
